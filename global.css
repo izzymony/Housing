@@ -1,0 +1,14 @@
+@tailwind components;
+@tailwind utilities;
+
+img {
+  @apply transition-opacity duration-300;
+}
+
+img:not([src]) {
+  @apply opacity-0;
+}
+
+img[src] {
+  @apply opacity-100;
+}
