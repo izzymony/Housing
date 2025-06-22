@@ -1,7 +1,3 @@
-// In index.js
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-btn');
     const menuItems = document.getElementById('menu-items');
@@ -258,9 +254,6 @@ document.addEventListener('DOMContentLoaded', function() {
     function renderProperties() {
         container.innerHTML = '';
         
-      /* The above code is a JavaScript snippet that iterates over a list of real estate listings
-      (`realEstateListings`) and dynamically creates HTML elements to display each property as a
-      card on a webpage. */
         realEstateListings.forEach(property => {
             const card = document.createElement('div');
             card.className = 'bg-white rounded-lg overflow-y-hidden shadow-md overflow-hidden hover:shadow-lg transition-shadow  ';
@@ -320,63 +313,6 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(card);
         });
     }
-
-
-    
 });
 
-
-
- function switchTab(tabName) {
-            // Hide all content sections
-            document.querySelectorAll('.dynamic-content').forEach(content => {
-                content.classList.add('hidden');
-            });
-            
-            // Show selected content
-            document.getElementById(`${tabName}-content`).classList.remove('hidden');
-            
-            
-            // Update tab styles
-            document.querySelectorAll('.clickable-tab').forEach(tab => {
-                if (tab.id === `${tabName}-tab`) {
-                    tab.classList.remove('inactive-tab');
-                    tab.classList.add('active-tab');
-                } else {
-                    tab.classList.remove('active-tab');
-                    tab.classList.add('inactive-tab');
-                }
-            });
-        }
-
-
-
-        // Initialize with Buyer tab active
-        document.addEventListener('DOMContentLoaded', function() {
-            switchTab('Buyer');
-        });
-
-        const profileSignIn = document.getElementById('profile-signin');
-        const  submitBtn = document.getElementById('submit-btn');
-        const password = document.getElementById('password');
-        const authOptions = document.getElementById('auth-options');
-        const  facebookBtn = document.getElementById('facebook-btn');
-        const googleBtn = document.getElementById('google-btn')
-        const popClose = document.getElementById('pop-close')
-
-        profileSignIn.addEventListener('click', function(e){
-                e.stopPropagation();
-
-                authOptions.classList.toggle('hidden');
-        })
-
-       
-
-        popClose.addEventListener('click', () => {
-  authOptions.classList.add('hidden');
-});
-
-profileSignIn.addEventListener('click', () =>{
-    e.stopPropagation();
-})
 
