@@ -393,11 +393,12 @@ window.switchTab = function(tabName){
      */
     
     // Get profile elements
-    const profileAvatar = document.getElementById('profile-avatar');
-    const profileName = document.getElementById('profile-name');
+    const userAvatar = document.getElementById('profile-avatar');
+    const userName = document.getElementById('profile-name');
     const dropdownAvatar = document.getElementById('dropdown-avatar');
     const dropdownName = document.getElementById('dropdown-name');
     const dropdownEmail = document.getElementById('dropdown-email');
+   
     const profileDropdown = document.getElementById('profile-dropdown');
    
 
