@@ -3,6 +3,8 @@ import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.9.1/firebase
 import {
   getAuth,
   GoogleAuthProvider,
+signOut,
+   onAuthStateChanged,
   FacebookAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
@@ -32,6 +34,8 @@ export {
   auth, 
   googleProvider, 
   facebookProvider,
+  signOut,
+   onAuthStateChanged,
   signInWithPopup,
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword

@@ -1,14 +1,6 @@
 // In index.js
-import { 
-  auth, 
-  googleProvider, 
-  facebookProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged
-} from './firebaseConfig.js';
 
+import { onAuthStateChanged, auth , signOut} from "./firebaseConfig.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-btn');
@@ -399,33 +391,72 @@ window.switchTab = function(tabName){
 
   
      */
+    
+    // Get profile elements
+    const profileAvatar = document.getElementById('profile-avatar');
+    const profileName = document.getElementById('profile-name');
+    const dropdownAvatar = document.getElementById('dropdown-avatar');
+    const dropdownName = document.getElementById('dropdown-name');
+    const dropdownEmail = document.getElementById('dropdown-email');
+    const profileDropdown = document.getElementById('profile-dropdown');
+   
 
-  document.getElementById("google-btn").addEventListener('click', async () => {
-    try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
+    // Toggle dropdown visibility
+    profileSignIn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        profileDropdown.classList.toggle('hidden');
+    });
 
-       onAuthStateChanged(auth, (user) => {
-        if (user){
-          console.log("user signed in:", {
-            name: user.displayName,
-            email: user.email,
-            photo: user.photoURL
-          })
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function() {
+        profileDropdown.classList.add('hidden');
+    });
+
+    // Handle auth state changes
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in with Google
+            console.log("Google user data:", {
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+            });
+
+            // Update profile in navbar
+            profileAvatar.src = user.photoURL || 'img/icons8-user-24 (2).png';
+            profileName.textContent = user.displayName || 'User';
+            
+            // Update dropdown
+            dropdownAvatar.src = user.photoURL || 'img/icons8-user-24 (2).png';
+            dropdownName.textContent = user.displayName || 'User';
+            dropdownEmail.textContent = user.email || '';
+
+            // Show name on larger screens
+            profileName.classList.remove('hidden');
+            
+            // Make avatar larger when logged in
+            profileAvatar.classList.add('w-8', 'h-8');
+        } else {
+            // User is signed out
+            profileAvatar.src = 'img/icons8-user-24 (2).png';
+            profileName.textContent = '';
+            profileName.classList.add('hidden');
+            profileAvatar.classList.remove('w-8', 'h-8');
         }
-       })
-        // Correctly store the user info
-       
-        
-        // Redirect after storing the data
-        window.location.href = 'main.html';
-    } 
-    catch(error) {
-        console.error('Error signing in:', error);
-        // You might want to show an error message to the user
-    }
+    });
+
+    // Sign out functionality
+    document.getElementById('sign-out-btn').addEventListener('click', () => {
+        signOut(auth).then(() => {
+            console.log("User signed out");
+        }).catch((error) => {
+            console.error('Sign out error:', error);
+        });
+    });
+
+    // ... (rest of your existing code) ...
 });
-});
+
 
 
 

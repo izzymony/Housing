@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Document</title>
+               <script src="https://cdn.tailwindcss.com"></script>
+               
+              
+</head>
+<body>
+  <!-- Fixed Navbar -->
+<nav class="bg-white fixed w-full shadow-lg z-50 top-0">
+  <div class="container mx-auto px-4 py-3 flex items-center">
+    <!-- Left side - Menu button and logo -->
+    <div class="flex items-center gap-4">
+      <button id="menu-btn" class="focus:outline-none">
+        <img src="img/icons8-menu-50 (1).png" alt="Menu" width="24" class="object-contain">
+      </button>
+      <img src="img/Screenshot_19-6-2025_144751_app.visily.ai.jpeg" alt="Logo" width="30" height="30" class="object-contain">
+    </div>
+
+    <!-- Right side - Search and user -->
+    <div class="flex items-center gap-4 ml-auto">
+      <div class="relative max-w-md">
+        <input 
+          type="text" 
+          class="w-full py-2 px-5 border-2 border-[#fc7458] rounded-full focus:outline-none focus:ring-2 focus:ring-[#fc7458] focus:border-transparent placeholder-gray-400 transition-all"
+          placeholder="Search..."
+        >
+        <div class="absolute right-3 top-1/2 transform -translate-y-1/2 text-[#fc7458]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
+        </div>
+      </div>
+
+      <div>
+        <img src="img/icons8-love-24.png" alt="" width="20  " height="20" id="clickfave">
+      </div>
+
+      
+    
+
+     <div class="relative">
+    <button id="profile-btn" class="flex items-center gap-2">
+      <!-- Default avatar (shown when not logged in) -->
+      <img id="user-avatar" 
+           src="img/icons8-user-24 (2).png" 
+           alt="User" 
+           width="24" 
+           class="rounded-full object-cover">
+      <!-- Will show name when logged in on larger screens -->
+      <span id="user-name" class="hidden md:inline text-sm"></span>
+    </button>
+    
+    <!-- Profile Dropdown -->
+   <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-md bg-white shadow-lg z-50 border border-gray-200">
+    <div class="px-4 py-3 border-b">
+      <div class="flex items-center gap-3">
+        <img id="dropdown-avatar" 
+             class="w-10 h-10 rounded-full object-cover" 
+             src="" 
+             alt="Profile">
+        <div class="truncate">
+          <p id="dropdown-name" class="text-sm font-medium text-gray-900 truncate"></p>
+          <p id="dropdown-email" class="text-xs text-gray-500 truncate"></p>
+        </div>
+      </div>
+    </div>
+    <div class="py-1">
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+      <button id="sign-out-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+        Sign out
+      </button>
+    </div>
+  </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Menu Overlay -->
+<div id="menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-40 hidden"></div>
+
+<!-- Side Menu -->
+<div id="menu-items" class="fixed top-0 left-0 h-screen w-[250px] bg-white z-50 transform -translate-x-full transition-transform duration-300">
+  <ul class="flex flex-col p-4 space-y-2 mt-4">
+    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded">Home</a></li>
+    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded">Products</a></li>
+    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded">Services</a></li>
+    <li><a href="#" class="block px-4 py-2 hover:bg-gray-100 rounded">Contact</a></li>
+  </ul>
+</div>
+
+<!-- Main Content - Add padding-top equal to navbar height -->
+<main class="pt-16">  
+  <div class="   " >
+        <div class="p-2 cursor-pointer bg-[#fc7458] text-white text-[12px] p-3 w-[130px] fixed right-3 z-10 hidden text-center shadow-lg"  id="display" >
+            Sign in required 
+        </div>
+      </div>
+ <div class="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+  <div class="px-4 py-3">
+    <!-- User Profile Section -->
+    <div class="flex items-center gap-2">
+      <!-- User Avatar -->
+      
+      
+      <!-- User Details -->
+    </div>
+  </div>
+  
+  <div class="py-1">
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+    <button id="sign-out-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+      Sign out
+    </button>
+  </div>
+</div>
+
+      <!-- Adjust this value based on your navbar height -->
+
+    
+  <div class="container mx-auto px-4 py-6">
+    <!-- Your page content goes here -->
+    <div id="property-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Property cards will be rendered here -->
+    </div>
+  </div>
+
+
+ 
+
+</main>
+   <script src="main.js" type="module"></script>
+</body>
+</html>
