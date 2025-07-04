@@ -1,14 +1,6 @@
 // In index.js
-import { 
-  auth, 
-  googleProvider, 
-  facebookProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged
-} from './firebaseConfig.js';
 
+import { onAuthStateChanged, auth , signOut} from "./firebaseConfig.js";
 
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-btn');
@@ -27,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const displayMessage =  document.getElementById('display-message')
         const popClose = document.getElementById('pop-close');
 
-
+          
 
   clickFave.addEventListener('click', function(e){
           e.stopPropagation();
@@ -271,8 +263,15 @@ function updateFavoritesCount(){
     };
 
     function saveFavorites() {
-        const favorites = realEstateListings.filter(p => p.isFavorite).map(p => p.id);
+        const favorites = realEstateListings.filter(p => p.isFavorite).map(p => ({
+          id: p.id,
+            title: p.title,
+            price: p.price,
+            image: p.image,
+            location: p.location
+        }));
         localStorage.setItem('propertyFavorites', JSON.stringify(favorites));
+        updateFavoritesCount(); // Update count after saving
     }
 
  function loadFavorites() {
@@ -353,22 +352,25 @@ function updateFavoritesCount(){
         });
     }
 
-
+profileSignIn.addEventListener('click', function(e){
+  e.stopPropagation
+})
 
          profileSignIn.addEventListener('click', function(e){
                 e.stopPropagation();
 
                 authOptions.classList.toggle('hidden');
         })
+
+        document.addEventListener('click', function(){
+          authOptions.classList.add('hidden')
+        })
        
 
-        popClose.addEventListener('click', () => {
-  authOptions.classList.add('hidden');
-});
+        
 
-profileSignIn.addEventListener('click', () =>{
-    e.stopPropagation();
-})
+
+
 
 
 window.switchTab = function(tabName){
@@ -399,33 +401,75 @@ window.switchTab = function(tabName){
 
   
      */
+    
+    // Get profile elements
+   
+   
+   /*  profileSignIn.addEventListener('click' , (e)=> {
+      e.stopPropagation()
+        profileDropdown.classList.toggle('hidden');
 
-  document.getElementById("google-btn").addEventListener('click', async () => {
-    try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
+    })
 
-       onAuthStateChanged(auth, (user) => {
-        if (user){
-          console.log("user signed in:", {
-            name: user.displayName,
-            email: user.email,
-            photo: user.photoURL
-          })
-        }
-       })
-        // Correctly store the user info
-       
-        
-        // Redirect after storing the data
-        window.location.href = 'main.html';
-    } 
-    catch(error) {
-        console.error('Error signing in:', error);
-        // You might want to show an error message to the user
-    }
+    document.addEventListener('click', (e) => {
+      profileDropdown.classList.add('hidden')
+    })
+ */
+  const userAvatar = document.getElementById('profile-avatar');
+    const userName = document.getElementById('profile-name');
+    const dropdownAvatar = document.getElementById('dropdown-avatar');
+    const dropdownName = document.getElementById('dropdown-name');
+    const dropdownEmail = document.getElementById('dropdown-email');
+    const profileBtn = document.getElementById('profile-btn')
+    const profileDropdown = document.getElementById('profile-dropdown');
+    const displayProfile = document.getElementById('display-profile');
+    const profile = document.getElementById('profile')
+    // Toggle dropdown visibility
+
+  
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in with Google
+            console.log("Google user data:", {
+                name: user.displayName,
+                email: user.email,
+                photo: user.photoURL
+            });
+
+            // Update profile in navbar
+            userAvatar.src = photoURL;
+            userAvatar.classList.add('w-8', 'h-8')
+            
+            userName.textContent = displayName;
+    userName.classList.remove('hidden');
+            // Update dropdown
+            dropdownAvatar.src = user.photoURL || 'img/icons8-user-24 (2).png';
+            dropdownName.textContent = user.displayName || 'User';
+            dropdownEmail.textContent = user.email || '';
+
+            // Show name on larger screens
+            display.classList.add('hidden');
+  } else {
+    // User is signed out
+    userAvatar.src = 'img/icons8-user-24 (2).png';
+    userAvatar.classList.remove('w-8', 'h-8');
+    userName.textContent = '';
+    userName.classList.add('hidden');
+  }
+    });
+
+    // Sign out functionality
+    document.getElementById('sign-out-btn').addEventListener('click', () => {
+        signOut(auth).then(() => {
+            console.log("User signed out");
+        }).catch((error) => {
+            console.error('Sign out error:', error);
+        });
+    });
+
+    // ... (rest of your existing code) ...
 });
-});
+
 
 
 

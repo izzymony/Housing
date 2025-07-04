@@ -1,15 +1,3 @@
-// In index.js
-import { 
-  auth, 
-  googleProvider, 
-  facebookProvider,
-  signInWithPopup,
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  onAuthStateChanged
-} from './firebaseConfig.js';
-
-
 document.addEventListener('DOMContentLoaded', function() {
     const menuBtn = document.getElementById('menu-btn');
     const menuItems = document.getElementById('menu-items');
@@ -18,15 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const clickFave = document.getElementById('clickfave');
     const display = document.getElementById('display') 
     const container = document.getElementById('property-cards');
-     const profileSignIn = document.getElementById('profile-signin');
-        const  submitBtn = document.getElementById('submit-btn');
-        const password = document.getElementById('password');
-        const authOptions = document.getElementById('auth-options');
-        const  facebookBtn = document.getElementById('facebook-btn');
-        const googleBtn = document.getElementById('google-btn');
-        const displayMessage =  document.getElementById('display-message')
-        const popClose = document.getElementById('pop-close');
-
 
 
   clickFave.addEventListener('click', function(e){
@@ -235,15 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 ];
 
-function updateFavoritesCount(){
-  const favorites = JSON.parse(localStorage.getItem('propertyFavorites')) || [];
-
-  const favCountElement= document.getElementById('favorites-count');
-  if(favCountElement){
-    favCountElement.textContent = favorites.length
-  }
-
-}
     // Initialize the page
     loadFavorites();
     renderProperties();
@@ -267,7 +237,6 @@ function updateFavoritesCount(){
         }
         
         saveFavorites();
-        updateFavoritesCount();
     };
 
     function saveFavorites() {
@@ -275,24 +244,16 @@ function updateFavoritesCount(){
         localStorage.setItem('propertyFavorites', JSON.stringify(favorites));
     }
 
- function loadFavorites() {
-    const savedFavorites = JSON.parse(localStorage.getItem('propertyFavorites')) || [];
-    const savedIds = savedFavorites.map(p => p.id);
-    
-    realEstateListings.forEach(p => {
-        p.isFavorite = savedIds.includes(p.id);
-    });
-    
-    updateFavoritesCount(); // Update count on load
-}
-
+    function loadFavorites() {
+        const favorites = JSON.parse(localStorage.getItem('propertyFavorites')) || [];
+        realEstateListings.forEach(p => {
+            p.isFavorite = favorites.includes(p.id);
+        });
+    }
 
     function renderProperties() {
         container.innerHTML = '';
         
-      /* The above code is a JavaScript snippet that iterates over a list of real estate listings
-      (`realEstateListings`) and dynamically creates HTML elements to display each property as a
-      card on a webpage. */
         realEstateListings.forEach(property => {
             const card = document.createElement('div');
             card.className = 'bg-white rounded-lg overflow-y-hidden shadow-md overflow-hidden hover:shadow-lg transition-shadow  ';
@@ -352,85 +313,6 @@ function updateFavoritesCount(){
             container.appendChild(card);
         });
     }
-
-
-
-         profileSignIn.addEventListener('click', function(e){
-                e.stopPropagation();
-
-                authOptions.classList.toggle('hidden');
-        })
-       
-
-        popClose.addEventListener('click', () => {
-  authOptions.classList.add('hidden');
-});
-
-profileSignIn.addEventListener('click', () =>{
-    e.stopPropagation();
-})
-
-
-window.switchTab = function(tabName){
-    document.querySelectorAll('.dynamic-content').forEach(content => {
-        content.classList.add('hidden');
-
-    });
-
-    document.getElementById(`${tabName}-content`).classList.remove('hidden')
-    document.querySelectorAll('.clickable-tab').forEach(content => {
-        tab.classList.toggle('bg-[#fc7458]')
-    })
-}
-/* window.switchTab = function(tabName) {
-    document.querySelectorAll('.dynamic-content').forEach(content => {
-      content.classList.add('hidden');
-    });
-    document.getElementById(`${tabName}-content`).classList.remove('hidden');
-    
-    document.querySelectorAll('.clickable-tab').forEach(tab => {
-      tab.classList.toggle('bg-[#fc7458]', tab.id === `${tabName}-tab`);
-      tab.classList.toggle('bg-gray-300', tab.id !== `${tabName}-tab`);
-    });
-  };
-
-  // Initialize with Buyer tab active
-  switchTab('Buyer');
-
-  
-     */
-
-  document.getElementById("google-btn").addEventListener('click', async () => {
-    try {
-        const result = await signInWithPopup(auth, googleProvider);
-        const user = result.user;
-
-       onAuthStateChanged(auth, (user) => {
-        if (user){
-          console.log("user signed in:", {
-            name: user.displayName,
-            email: user.email,
-            photo: user.photoURL
-          })
-        }
-       })
-        // Correctly store the user info
-       
-        
-        // Redirect after storing the data
-        window.location.href = 'main.html';
-    } 
-    catch(error) {
-        console.error('Error signing in:', error);
-        // You might want to show an error message to the user
-    }
-});
 });
 
 
-
- 
-
-
-
-       
