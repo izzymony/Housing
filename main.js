@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const displayMessage =  document.getElementById('display-message')
         const popClose = document.getElementById('pop-close');
 
-
+          
 
   clickFave.addEventListener('click', function(e){
           e.stopPropagation();
@@ -263,8 +263,15 @@ function updateFavoritesCount(){
     };
 
     function saveFavorites() {
-        const favorites = realEstateListings.filter(p => p.isFavorite).map(p => p.id);
+        const favorites = realEstateListings.filter(p => p.isFavorite).map(p => ({
+          id: p.id,
+            title: p.title,
+            price: p.price,
+            image: p.image,
+            location: p.location
+        }));
         localStorage.setItem('propertyFavorites', JSON.stringify(favorites));
+        updateFavoritesCount(); // Update count after saving
     }
 
  function loadFavorites() {
@@ -345,22 +352,25 @@ function updateFavoritesCount(){
         });
     }
 
-
+profileSignIn.addEventListener('click', function(e){
+  e.stopPropagation
+})
 
          profileSignIn.addEventListener('click', function(e){
                 e.stopPropagation();
 
                 authOptions.classList.toggle('hidden');
         })
+
+        document.addEventListener('click', function(){
+          authOptions.classList.add('hidden')
+        })
        
 
-        popClose.addEventListener('click', () => {
-  authOptions.classList.add('hidden');
-});
+        
 
-profileSignIn.addEventListener('click', () =>{
-    e.stopPropagation();
-})
+
+
 
 
 window.switchTab = function(tabName){
@@ -393,27 +403,30 @@ window.switchTab = function(tabName){
      */
     
     // Get profile elements
-    const userAvatar = document.getElementById('profile-avatar');
+   
+   
+   /*  profileSignIn.addEventListener('click' , (e)=> {
+      e.stopPropagation()
+        profileDropdown.classList.toggle('hidden');
+
+    })
+
+    document.addEventListener('click', (e) => {
+      profileDropdown.classList.add('hidden')
+    })
+ */
+  const userAvatar = document.getElementById('profile-avatar');
     const userName = document.getElementById('profile-name');
     const dropdownAvatar = document.getElementById('dropdown-avatar');
     const dropdownName = document.getElementById('dropdown-name');
     const dropdownEmail = document.getElementById('dropdown-email');
-   
+    const profileBtn = document.getElementById('profile-btn')
     const profileDropdown = document.getElementById('profile-dropdown');
-   
-
+    const displayProfile = document.getElementById('display-profile');
+    const profile = document.getElementById('profile')
     // Toggle dropdown visibility
-    profileSignIn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        profileDropdown.classList.toggle('hidden');
-    });
 
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function() {
-        profileDropdown.classList.add('hidden');
-    });
-
-    // Handle auth state changes
+  
     onAuthStateChanged(auth, (user) => {
         if (user) {
             // User is signed in with Google
@@ -424,26 +437,25 @@ window.switchTab = function(tabName){
             });
 
             // Update profile in navbar
-            profileAvatar.src = user.photoURL || 'img/icons8-user-24 (2).png';
-            profileName.textContent = user.displayName || 'User';
+            userAvatar.src = photoURL;
+            userAvatar.classList.add('w-8', 'h-8')
             
+            userName.textContent = displayName;
+    userName.classList.remove('hidden');
             // Update dropdown
             dropdownAvatar.src = user.photoURL || 'img/icons8-user-24 (2).png';
             dropdownName.textContent = user.displayName || 'User';
             dropdownEmail.textContent = user.email || '';
 
             // Show name on larger screens
-            profileName.classList.remove('hidden');
-            
-            // Make avatar larger when logged in
-            profileAvatar.classList.add('w-8', 'h-8');
-        } else {
-            // User is signed out
-            profileAvatar.src = 'img/icons8-user-24 (2).png';
-            profileName.textContent = '';
-            profileName.classList.add('hidden');
-            profileAvatar.classList.remove('w-8', 'h-8');
-        }
+            display.classList.add('hidden');
+  } else {
+    // User is signed out
+    userAvatar.src = 'img/icons8-user-24 (2).png';
+    userAvatar.classList.remove('w-8', 'h-8');
+    userName.textContent = '';
+    userName.classList.add('hidden');
+  }
     });
 
     // Sign out functionality

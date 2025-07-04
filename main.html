@@ -36,47 +36,74 @@
       </div>
 
       <div>
+        <a href="favorites.html">
         <img src="img/icons8-love-24.png" alt="" width="20  " height="20" id="clickfave">
+        </a>
       </div>
 
       
     
-
-     <div class="relative">
-    <button id="profile-btn" class="flex items-center gap-2">
-      <!-- Default avatar (shown when not logged in) -->
-      <img id="user-avatar" 
-           src="img/icons8-user-24 (2).png" 
-           alt="User" 
-           width="24" 
-           class="rounded-full object-cover">
-      <!-- Will show name when logged in on larger screens -->
-      <span id="user-name" class="hidden md:inline text-sm"></span>
-    </button>
-    
-    <!-- Profile Dropdown -->
-   <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-md bg-white shadow-lg z-50 border border-gray-200">
-    <div class="px-4 py-3 border-b">
-      <div class="flex items-center gap-3">
-        <img id="dropdown-avatar" 
-             class="w-10 h-10 rounded-full object-cover" 
-             src="" 
-             alt="Profile">
-        <div class="truncate">
-          <p id="dropdown-name" class="text-sm font-medium text-gray-900 truncate"></p>
-          <p id="dropdown-email" class="text-xs text-gray-500 truncate"></p>
+<button id="profile-btn" class="flex items-center gap-2 focus:outline-none">
+        <div class="display-profile" id="profile-signin">
+            <img id="user-avatar" 
+                 src="img/icons8-user-24 (2).png" 
+                 alt="User " 
+                 width="24" 
+                 class="rounded-full object-cover">
         </div>
-      </div>
-    </div>
-    <div class="py-1">
-      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-      <button id="sign-out-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-        Sign out
-      </button>
+        <span id="user-name" class="hidden md:inline text-sm">User  Name</span>
+    </button>
+ <div id="auth-options" class="fixed inset-0 flex rignt-0  z-50 bg-black bg-opacity-50 hidden">
+   
+  <div class="bg-white rounded-lg p-3 mx-4 w-56 absolute right-0 max-w-lg h-fit overflow-y-auto">
+     <div class="px-4 py-3 border-b" id="no">
+            <div class="flex items-center gap-3">
+                <img id="dropdown-avatar" 
+                     class="w-10 h-10 rounded-full object-cover" 
+                     src="img/icons8-user-24 (2).png" 
+                     alt="Profile">
+                <div class="truncate">
+                    <p id="dropdown-name" class="text-sm font-medium text-gray-900 truncate">User  Name</p>
+                    <p id="dropdown-email" class="text-xs text-gray-500 truncate">user@example.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="py-1">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+            <button id="sign-out-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                Sign out
+            </button>
+        </div>
     </div>
   </div>
+</div>
+
+    <!-- <div class="relative">
+    
+
+    <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-56 rounded-md bg-white shadow-lg z-50 border border-gray-200">
+        <div class="px-4 py-3 border-b" id="no">
+            <div class="flex items-center gap-3">
+                <img id="dropdown-avatar" 
+                     class="w-10 h-10 rounded-full object-cover" 
+                     src="img/icons8-user-24 (2).png" 
+                     alt="Profile">
+                <div class="truncate">
+                    <p id="dropdown-name" class="text-sm font-medium text-gray-900 truncate">User  Name</p>
+                    <p id="dropdown-email" class="text-xs text-gray-500 truncate">user@example.com</p>
+                </div>
+            </div>
+        </div>
+        <div class="py-1">
+            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+            <button id="sign-out-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
+                Sign out
+            </button>
+        </div>
     </div>
-  </div>
+</div> -->
+
+  </div> 
 </nav>
 
 <!-- Menu Overlay -->
@@ -93,31 +120,13 @@
 </div>
 
 <!-- Main Content - Add padding-top equal to navbar height -->
-<main class="pt-16">  
+<main class="pt-16 bg-white">  
   <div class="   " >
         <div class="p-2 cursor-pointer bg-[#fc7458] text-white text-[12px] p-3 w-[130px] fixed right-3 z-10 hidden text-center shadow-lg"  id="display" >
             Sign in required 
         </div>
       </div>
- <div class="absolute right-0 z-50 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-  <div class="px-4 py-3">
-    <!-- User Profile Section -->
-    <div class="flex items-center gap-2">
-      <!-- User Avatar -->
-      
-      
-      <!-- User Details -->
-    </div>
-  </div>
-  
-  <div class="py-1">
-    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
-    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
-    <button id="sign-out-btn" class="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-      Sign out
-    </button>
-  </div>
-</div>
+ 
 
       <!-- Adjust this value based on your navbar height -->
 
