@@ -285,10 +285,11 @@ function updateFavoritesCount(){
     
     updateFavoritesCount(); // Update count on load
 }
-
+window.propertyData = realEstateListings;
 
     function renderProperties() {
         container.innerHTML = '';
+       
         
       /* The above code is a JavaScript snippet that iterates over a list of real estate listings
       (`realEstateListings`) and dynamically creates HTML elements to display each property as a
@@ -296,7 +297,16 @@ function updateFavoritesCount(){
         realEstateListings.forEach(property => {
             const card = document.createElement('div');
             card.className = 'bg-white rounded-lg overflow-y-hidden shadow-md overflow-hidden hover:shadow-lg transition-shadow  ';
-            
+             card.addEventListener('click', (e) => {
+    // Prevent navigation if clicking on favorite button
+    if (e.target.closest('.heart-button')) return;
+    
+    // Store the ENTIRE property object in localStorage
+    localStorage.setItem('currentProperty', JSON.stringify(property));
+    
+    // Navigate to property page with ID in URL
+    window.location.href = `property.html?id=${property.id}`;
+});
             card.innerHTML = `
                 <div class="relative h-48 overflow-hidden group">
                     <img src="${property.image}" alt="${property.title}" class="w-full h-full -z-10  object-cover transition-transform duration-500 group">
